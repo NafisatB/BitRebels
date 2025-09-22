@@ -26,6 +26,15 @@ const removeProduct = (id) => {
   return `Removed ${removed[0].name}`;
 };
  
+const updateStock = (id, change) => {
+  const product = findProductById(id);
+  if (!product) {
+    return `Product with ID ${id} not found.`;
+  }
+  product.quantity += change;
+  product.lowStock = product.quantity < 10;
+  return `Updated ${product.name}, new quantity: ${product.quantity}`;
+};
  
 const generateReport = () => {
   let totalValue = 0;
@@ -47,7 +56,6 @@ const generateReport = () => {
   return report;
 };
  
-// --- Testing like your bank example ---
 console.log(inventory.length, "before adding");
  
 addProduct(1, "Laptop", 1200, 5);
@@ -60,3 +68,6 @@ console.log(updateStock(1, 5));
 console.log(removeProduct(2));
  
 console.log(generateReport());
+
+
+
